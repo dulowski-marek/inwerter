@@ -15,7 +15,7 @@
 		],
 
 		"experimentalDecorators": true,
-		"emitDecoratorMeatdata": true
+		"emitDecoratorMetadata": true
 	},
 
 	"exclude": [
