@@ -8,8 +8,8 @@ export class Injector {
 
 	}
 
-	register(token: Token, provider: any): void {
-		this.registry.set(token, provider);
+	register(token: Token): void {
+		this.registry.set(token, null);
 	}
 
 	provide<T = any>(token: Token): T {
