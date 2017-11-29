@@ -2,23 +2,36 @@ import { Metadata } from "../metadata/index";
 
 export class Injector {
 
-	private registry = new Map<Token, any>();
+	private registry = new Set<Token>();
+	private resolved = new Map<Token, any>();
 
 	constructor() {
 
 	}
 
 	register(token: Token): void {
-		this.registry.set(token, null);
+		this.registry.add(token);
 	}
 
 	provide<T = any>(token: Token): T {
-		return this.registry.get(token);
+		return this.resolved.get(token);
 	}
 
-	resolve<T = any>(target: any): T {
+	resolve<T extends { new(...args: any[]): T }>(target: T): T {
 		let paramtypes = Metadata.get(target, 'design:paramtypes');
 
-		return new target(paramtypes.map(param => this.resolve(param)));
+		return new target(paramtypes.map(provider => {
+			// If provider has already been resolved
+			if (this.resolved.has(provider)) {
+				return this.resolved.get(provider);
+			}
+
+			let resolved = this.resolve(provider);
+
+			this.resolved.set(provider, resolved);
+			this.registry.delete(provider);
+
+			return resolved;
+		}));
 	}
 }
