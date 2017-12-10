@@ -1,5 +1,10 @@
-export function Provide(): ClassDecorator {
-	return function<T>(target: T): T {
-		return target;
-	}
+import { Metadata } from '../metadata';
+
+export function Provide<T>(target: T): T {
+
+	Metadata.set(target, {
+		args: Metadata.get(target, 'design:paramtypes')
+	});
+
+	return target;
 }
