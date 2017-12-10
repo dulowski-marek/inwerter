@@ -1,6 +1,7 @@
 .vscode
 
+.gitignore
 node_modules
 
-es2015
+esm
 index.umd.js

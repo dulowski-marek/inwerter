@@ -4,13 +4,13 @@
   "description": "Modular dependency injection simplified",
   "main": "index.umd.js",
   "types": "index.d.ts",
-  "module": "es2015/index.js",
+  "module": "esm/index.js",
   "scripts": {
     "start": "karma start --singleRun=false",
     "test": "karma start",
     "build": "webpack --config .config/webpack.build.js --progress --colors",
-    "prepublish": "yarn build && tsc --outDir es2015",
-    "postpublish": "rm -rfv es2015 && rm -v index.umd.js"
+    "prepublish": "yarn build && tsc --outDir esm --declaration && echo 'export * from \"./esm\"; \n' > index.d.ts",
+    "postpublish": "rm -rfv esm && rm -v index.umd.js index.d.ts"
   },
   "repository": "git@github.com:dulowski-marek/inwerter.git",
   "author": "Marek Dulowski",

@@ -4,6 +4,9 @@
 		"module": "es2015",
 		"moduleResolution": "node",
 
+		"outDir": "esm",
+		"declaration": true,
+
 		"lib": [
 			"es2015",
 			"es2016",
@@ -19,6 +22,7 @@
 	},
 
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		"esm"
 	]
 }
