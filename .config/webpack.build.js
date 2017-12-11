@@ -37,9 +37,14 @@ module.exports = {
 		rules: [
 			{
 				test: /\.ts$/,
-				loaders: [
-					'ts-loader'
-				]
+				use: [{
+					loader: 'ts-loader',
+					options: {
+						compilerOptions: {
+							declaration: false
+						}
+					}
+				}]
 			}
 		]
 	},

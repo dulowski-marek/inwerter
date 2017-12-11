@@ -1,37 +1,49 @@
-import { Metadata } from "../metadata/index";
+import { Metadata } from '../metadata';
 
 export class Injector {
 
-	private registry = new Set<Token>();
-	private resolved = new Map<Token, any>();
+	private registry: Map<any, any> = new Map();
+	private registered: WeakSet<any> = new WeakSet();
 
 	constructor() {
 
 	}
 
-	register(token: Token): void {
-		this.registry.add(token);
+	public register(provider: any): void {
+		if (this.registered.has(provider)) {
+			return;
+		}
+
+		this.registered.add(provider);
 	}
 
-	provide<T = any>(token: Token): T {
-		return this.resolved.get(token);
-	}
+	public resolve<T>(provider: any): T {
 
-	resolve<T extends { new(...args: any[]): T }>(target: T): T {
-		let paramtypes = Metadata.get(target, 'design:paramtypes');
+		/**
+		 * Resolve instantly, if has already
+		 * been instantiated. 
+		 */
+		if (this.registry.has(provider)) {
+			return this.registry.get(provider);
+		}
 
-		return new target(paramtypes.map(provider => {
-			// If provider has already been resolved
-			if (this.resolved.has(provider)) {
-				return this.resolved.get(provider);
-			}
+		/**
+		 * Obtain parameter types from provider's 
+		 * metadata annotation.
+		 */
+		const { args }: { args: any[] } = Metadata.get(provider);
 
-			let resolved = this.resolve(provider);
+		const resolved: T = new provider(args.map(v => this.resolve(v)));
 
-			this.resolved.set(provider, resolved);
-			this.registry.delete(provider);
+		/**
+		 * Block redundant instantiation by saving
+		 * resolved provider to registry, but only
+		 * if it has been registered beforehand.
+		 */
+		if (this.registered.has(provider)) {
+			this.registry.set(provider, resolved);
+		}
 
-			return resolved;
-		}));
+		return resolved;
 	}
 }
