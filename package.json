@@ -1,6 +1,6 @@
 {
   "name": "inwerter",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Modular dependency injection simplified",
   "main": "index.umd.js",
   "types": "index.d.ts",
