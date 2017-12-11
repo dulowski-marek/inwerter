@@ -8,4 +8,12 @@ export class Injector {
 	constructor() {
 
 	}
+
+	public register(provider: any): void {
+		if (this.registered.has(provider)) {
+			return;
+		}
+
+		this.registered.add(provider);
+	}
 }
