@@ -14,7 +14,7 @@ function _merge<T, S>(target: T, source: S): T & S {
 	/**
 	 * Operate on copy, not to mutate original object.
 	 */
-	let acc: any = isArray(target) ? [] : Object.assign({}, target);
+	let acc: any = isArray(target) ? Array.from(target) : Object.assign({}, target);
 
 	for (let key of Object.keys(source)) {
 		let t = acc[key], s = source[key];
