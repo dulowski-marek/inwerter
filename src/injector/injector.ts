@@ -56,8 +56,15 @@ export function _uniformProvideMetadata<T>(token: Newable<T> | any, options?: Pa
 
 export class Injector {
 
-	private registry: Map<any, any> = new Map();
-	private registered: WeakSet<any> = new WeakSet();
+	/**
+	 * A container for singletons.
+	 */
+	private container = new Map<any, any>();
+
+	/**
+	 * Registry mapping tokens to their resolve options.
+	 */
+	private registry = new Map<any, ProvideMetadata<any>>();
 
 	constructor() {
 
