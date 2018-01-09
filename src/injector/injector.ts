@@ -70,12 +70,19 @@ export class Injector {
 
 	}
 
-	public register(provider: any): void {
-		if (this.registered.has(provider)) {
-			return;
-		}
-
-		this.registered.add(provider);
+	/**
+	 * Register provider resolution options for given token.
+	 * 
+	 * @param token Token for which provider resolution will be stored.
+	 * 
+	 * @param options Optional provider resolution options.
+	 * 
+	 * __Note__: Factory function (and optionally provide) be supplied unless token is a class.
+	 * Otherwise it will throw upon registraction, or, if token is a function, upon
+	 * instantiation.
+	 */
+	public register<T>(token: Newable<T> | any, options?: Partial<ProvideMetadata<T>>): void {
+		this.registry.set(token, _uniformProvideMetadata(token, options));
 	}
 
 	public resolve<T>(provider: any): T {
