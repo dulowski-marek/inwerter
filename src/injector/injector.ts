@@ -1,5 +1,17 @@
 import { Metadata } from '../metadata';
 
+export interface ProvideMetadata<TProvider> {
+	factory: (...args: any[]) => TProvider;
+	provide: ResolveRequest[];
+	singleton?: boolean;
+}
+
+export interface ResolveRequest {
+	token: any;
+	provide: ResolveRequest[]; 
+}
+
+
 export class Injector {
 
 	private registry: Map<any, any> = new Map();
