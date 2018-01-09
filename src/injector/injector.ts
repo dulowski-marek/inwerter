@@ -1,4 +1,10 @@
 import { Metadata } from '../metadata';
+import { Newable } from '../newable';
+
+import { isClass } from '../helpers/isClass';
+import { isArrayEmpty } from '../helpers/isArrayEmpty';
+
+import { merge } from '../helpers/merge';
 
 export interface ProvideMetadata<TProvider> {
 	factory: (...args: any[]) => TProvider;
@@ -85,33 +91,41 @@ export class Injector {
 		this.registry.set(token, _uniformProvideMetadata(token, options));
 	}
 
-	public resolve<T>(provider: any): T {
+	/**
+	 * Return provider associated with token.
+	 */
+	public resolve<T>(token: Newable<T> | any): T {
 
-		/**
-		 * Resolve instantly, if has already
-		 * been instantiated. 
-		 */
-		if (this.registry.has(provider)) {
-			return this.registry.get(provider);
+		let provider: T;
+
+		if (!this.registry.has(token)) {
+			const { factory, provide } = _uniformProvideMetadata<T>(token);
+
+			return this._resolve(factory, provide);
 		}
 
-		/**
-		 * Obtain parameter types from provider's 
-		 * metadata annotation.
-		 */
-		const { args }: { args: any[] } = Metadata.get(provider);
+		const { factory, provide, singleton } = this.registry.get(token);
 
-		const resolved: T = new provider(args.map(v => this.resolve(v)));
+		if (singleton) {
 
-		/**
-		 * Block redundant instantiation by saving
-		 * resolved provider to registry, but only
-		 * if it has been registered beforehand.
-		 */
-		if (this.registered.has(provider)) {
-			this.registry.set(provider, resolved);
+			/**
+			 * If it has already been instantiated,
+			 * get the provider associated with token.
+			 */
+			if (this.container.has(token)) {
+				return this.container.get(token);
+			}
+
+			return this.container.set(
+				token, 
+				provider = this._resolve(factory, provide)
+			), provider;
 		}
 
-		return resolved;
+		return this._resolve(factory, provide);
+	}
+
+	private _resolve<T>(factory: (...args: any[]) => T, provide: ResolveRequest[]): T {
+		return factory(...provide.map(({ token }) => this.resolve(token)));
 	}
 }
