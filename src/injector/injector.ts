@@ -8,7 +8,7 @@ import { merge } from '../helpers/merge';
 
 export interface ProvideMetadata<TProvider> {
 	factory: (...args: any[]) => TProvider;
-	provide: ResolveRequest[];
+	provide: any[];
 	singleton?: boolean;
 }
 

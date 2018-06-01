@@ -3,5 +3,4 @@
 .gitignore
 node_modules
 
-esm
-index.umd.js
+dist
