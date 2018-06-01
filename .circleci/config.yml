@@ -27,11 +27,11 @@ jobs:
           # We publish only ES module artifacts,
           # because the library is only to be used
           # by Typescript environments.
-          root: ~/esm
+          root: ./
 
           # Include all paths
           paths:
-            - *
+            - dist
 
   publish:
     docker:
@@ -43,7 +43,7 @@ jobs:
       - checkout
       - run: echo $TOKEN > ./.npmrc
       - attach_workspace:
-          - at: ~/esm
+          - at: ./
 
       - run: yarn publish
       - run: yarn run cleanup
