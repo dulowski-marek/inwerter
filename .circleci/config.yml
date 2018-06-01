@@ -49,17 +49,16 @@ jobs:
       - run: yarn run cleanup
 
 workflows:
-  version: 1
+  version: 2
   publish:
+    jobs:
+      - build
+      - publish:
+          context: npmauth
+          requires:
+              - build
     triggers:
       - schedule:
           filters:
             branches:
-              only:
-                - master
-    jobs:
-      - build
-      - publish:
-          - context: npmauth
-          - requires:
-              - build
+              only: master
