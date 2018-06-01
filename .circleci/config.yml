@@ -52,7 +52,7 @@ workflows:
   version: 2
   publish:
     jobs:
-      - build
+      - build:
           filters:
             branches:
               only: master
