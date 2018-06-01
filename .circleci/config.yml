@@ -43,7 +43,7 @@ jobs:
       - checkout
       - run: echo $TOKEN > ./.npmrc
       - attach_workspace:
-          - at: ./
+          at: ./
 
       - run: yarn publish
       - run: yarn run cleanup
