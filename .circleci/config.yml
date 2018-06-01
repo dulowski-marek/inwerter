@@ -53,12 +53,13 @@ workflows:
   publish:
     jobs:
       - build
+          filters:
+            branches:
+              only: master
       - publish:
           context: npmauth
           requires:
               - build
-    triggers:
-      - schedule:
           filters:
             branches:
               only: master
