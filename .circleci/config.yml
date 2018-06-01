@@ -1,0 +1,65 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+
+    working_directory: ~/.tmp
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - default-{{ checksum "package.json" }}
+            - default-
+
+      - run: yarn install
+
+      - save_cache:
+          key: default-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+      - run: yarn run build
+      - persist_to_workspace:
+          # We publish only ES module artifacts,
+          # because the library is only to be used
+          # by Typescript environments.
+          root: ~/esm
+
+          # Include all paths
+          paths:
+            - *
+
+  publish:
+    docker:
+      - image: circleci/node:7.10
+
+    working_directory: ~/.tmp
+
+    steps:
+      - checkout
+      - run: echo $TOKEN > ./.npmrc
+      - attach_workspace:
+          - at: ~/esm
+
+      - run: yarn publish
+      - run: yarn run cleanup
+
+workflows:
+  version: 1
+  publish:
+    triggers:
+      - schedule:
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
+      - publish:
+          - context: npmauth
+          - requires:
+              - build
