@@ -17,7 +17,7 @@ module.exports = {
 	context: path.resolve(__dirname, '..'),
 	entry: './src/index.ts',
 	output: {
-		path: path.resolve(__dirname, '..'),
+		path: path.resolve(__dirname, '../dist'),
 		filename: 'index.umd.js',
 		libraryTarget: 'umd',
 		library: {
