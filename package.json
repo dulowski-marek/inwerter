@@ -9,9 +9,7 @@
     "start": "karma start --singleRun=false",
     "test": "karma start",
     "build": "webpack --config .config/webpack.build.js --progress --colors && tsc --outDir dist/esm --declaration",
-    "cleanup": "rm -rfv dist",
-    "prepublish": "yarn build",
-    "postpublish": "yarn run cleanup"
+    "cleanup": "rm -rfv dist"
   },
   "repository": "git@github.com:dulowski-marek/inwerter.git",
   "author": "Marek Dulowski",
