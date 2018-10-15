@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - checkout
-      - run: echo $TOKEN > ./.npmrc
+      - run: echo //registry.npmjs.org/:_authToken=${TOKEN} > ./.npmrc
       - attach_workspace:
           at: ./
 
