@@ -63,7 +63,7 @@ describe('Injector', () => {
 
 		injector.register(ProviderConfig, {
 			factory: () => config,
-			provide: []
+			provide: [],
 		});
 
 		expect(injector.resolve<Provider>(Provider).injectedConfig).to.not.be.undefined;
