@@ -3,7 +3,6 @@ import { expect } from 'chai';
 
 import { Injector } from './injector';
 import { Injectable } from '../injectable';
-import { Metadata } from '../metadata';
 import { Inject } from '../inject';
 
 describe('Injector', () => {
