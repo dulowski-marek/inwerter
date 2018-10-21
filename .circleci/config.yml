@@ -66,7 +66,7 @@ workflows:
       - build:
           filters:
             tags:
-              only: /^v([0-9]\.)+$/
+              only: /^v.*$/
             branches:
               ignore: /.*/
       - publish:
@@ -75,6 +75,6 @@ workflows:
               - build
           filters:
             tags:
-              only: /^v([0-9]\.)+$/
+              only: /^v.*$/
             branches:
-              only: /master/
+              ignore: /.*/
