@@ -11,10 +11,6 @@ export interface ProvideMetadata<TProvider> {
 	singleton?: boolean;
 }
 
-export interface ResolveRequest {
-	token: any;
-	provide: ResolveRequest[]; 
-}
 
 /**
  * Supplied options, if any, are merged into defaults.
@@ -124,7 +120,7 @@ export class Injector {
 		return this._resolve(factory, provide);
 	}
 
-	private _resolve<T>(factory: (...args: any[]) => T, provide: ResolveRequest[]): T {
-		return factory(...provide.map(({ token }) => this.resolve(token)));
+	private _resolve<T>(factory: (...args: any[]) => T, provide: any[]): T {
+		return factory(...provide.map(provider => this.resolve(provider)));
 	}
 }
