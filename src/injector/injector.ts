@@ -17,42 +17,96 @@ export interface ProvideMetadata<TProvider> {
  */
 export function _uniformProvideMetadata<T>(token: Newable<T> | any, options?: Partial<ProvideMetadata<T>>): ProvideMetadata<T> {
 
-	const defaults: ProvideMetadata<T> = {
-		factory: (...args: any[]) => new token(...args),
-		provide: null,
-		singleton: false
-	};
+	/**
+	 * If factory is not provided, fallback to class.
+	 * Provide is being obtained, fallback to metadata.
+	 */
 
-	if (isClass<T>(token)) {
+	/**
+	 * Infer class defaults, if options aren't supplied
+	 */
+	if (!options) {
 
-		defaults.provide = Metadata.get(token).provide;
+		/**
+		 * Class defaults cannot be inferred, if token is not a class.
+		 */
+		if (!isClass<T>(token)) {
+			throw new Error(`
+				Could not instantiate ${token} provider:
+				Options weren't supplied and token is not a class.
+			`);
+		}
 
-		return options ? merge(defaults, options) : defaults;
+		/**
+		 * Get metadata if token is a class
+		 */
+		const metadata = Metadata.get(token);
+
+		/**
+		 * If there's no provide key in token's metadata
+		 */
+		if (!(metadata && metadata.provide)) {
+			throw new Error(`
+				Provider ${token} should be decorated as Injectable
+				or options with provide should be supplied when registering the provider.
+			`);
+		}
+
+		/**
+		 * Return class defaults
+		 */
+		return {
+			factory: (...args: any[]) => new token(...args),
+			provide: metadata.provide,
+		};
 	}
 
-	const { factory, provide } = options;
-	
 	/**
-	 * Note: token is not a class here.
-	 * 
-	 * If token is not a class and options are not supplied,
-	 * there isn't any appropriate default factory method.
+	 * If options were supplied
 	 */
+	let { factory, provide } = options;
+
 	if (!factory) {
-		throw new Error(`
-			Could not infer how to instantiate provider ${token}.
-			Please supply factory function in options parameter.
-		`);
+
+		/**
+		 * If there's no factory and token is not a class,
+		 * we cannot infer how it is instantiated
+		 */
+		if (!isClass<T>(token)) {
+			throw new Error(`
+				Provider ${token} can't be instantiated.
+				Factory function wasn't supplied and token is not a class.
+			`);
+		}
+
+		/**
+		 * If token is a class, return factory defaults
+		 */
+		factory = (...args: any[]) => new token(...args);
 	}
 
 	if (!provide) {
-		throw new Error(`
-			Could not infer provide array for ${token}.
-			Please supply it in options parameter.
-		`);
+		/**
+		 * Try to get metadata from token (provider)
+		 */
+		try {
+			provide = Metadata.get(token).provide;
+		} catch(err) {
+			throw new Error(`
+				Provider ${token} can't be instantiated.
+				Provide array wasn't supplied and can't implicitly get metadata
+				for token.
+			`);
+		}
 	}
 
-	return merge(defaults, options);
+	/**
+	 * Else merge inferred defaults with options
+	 */
+	return merge(options, {
+		provide,
+		factory
+	});
 }
 
 export class Injector {
