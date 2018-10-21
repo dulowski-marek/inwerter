@@ -132,7 +132,7 @@ export class Injector {
 	 * 
 	 * @param options Optional provider resolution options.
 	 * 
-	 * __Note__: Factory function (and optionally provide) be supplied unless token is a class.
+	 * __Note__: Factory function (and optionally provide) should be supplied unless token is a class.
 	 * Otherwise it will throw upon registraction, or, if token is a function, upon
 	 * instantiation.
 	 */
