@@ -2,7 +2,6 @@ import { Metadata } from '../metadata';
 import { Newable } from '../newable';
 
 import { isClass } from '../helpers/isClass';
-import { isArrayEmpty } from '../helpers/isArrayEmpty';
 
 import { merge } from '../helpers/merge';
 
