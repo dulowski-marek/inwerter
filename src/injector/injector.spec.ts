@@ -3,7 +3,6 @@ import { expect } from 'chai';
 
 import { Injector } from './injector';
 import { Injectable } from '../injectable';
-import { Metadata } from '../metadata';
 import { Inject } from '../inject';
 
 describe('Injector', () => {
@@ -64,7 +63,7 @@ describe('Injector', () => {
 
 		injector.register(ProviderConfig, {
 			factory: () => config,
-			provide: []
+			provide: [],
 		});
 
 		expect(injector.resolve<Provider>(Provider).injectedConfig).to.not.be.undefined;

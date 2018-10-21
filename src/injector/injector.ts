@@ -2,7 +2,6 @@ import { Metadata } from '../metadata';
 import { Newable } from '../newable';
 
 import { isClass } from '../helpers/isClass';
-import { isArrayEmpty } from '../helpers/isArrayEmpty';
 
 import { merge } from '../helpers/merge';
 
@@ -12,52 +11,102 @@ export interface ProvideMetadata<TProvider> {
 	singleton?: boolean;
 }
 
-export interface ResolveRequest {
-	token: any;
-	provide: ResolveRequest[]; 
-}
 
 /**
  * Supplied options, if any, are merged into defaults.
  */
 export function _uniformProvideMetadata<T>(token: Newable<T> | any, options?: Partial<ProvideMetadata<T>>): ProvideMetadata<T> {
 
-	const defaults: ProvideMetadata<T> = {
-		factory: (...args: any[]) => new token(...args),
-		provide: null,
-		singleton: false
-	};
+	/**
+	 * If factory is not provided, fallback to class.
+	 * Provide is being obtained, fallback to metadata.
+	 */
 
-	if (isClass<T>(token)) {
+	/**
+	 * Infer class defaults, if options aren't supplied
+	 */
+	if (!options) {
 
-		defaults.provide = Metadata.get(token).provide;
+		/**
+		 * Class defaults cannot be inferred, if token is not a class.
+		 */
+		if (!isClass<T>(token)) {
+			throw new Error(`
+				Could not instantiate ${token} provider:
+				Options weren't supplied and token is not a class.
+			`);
+		}
 
-		return options ? merge(defaults, options) : defaults;
+		/**
+		 * Get metadata if token is a class
+		 */
+		const metadata = Metadata.get(token);
+
+		/**
+		 * If there's no provide key in token's metadata
+		 */
+		if (!(metadata && metadata.provide)) {
+			throw new Error(`
+				Provider ${token} should be decorated as Injectable
+				or options with provide should be supplied when registering the provider.
+			`);
+		}
+
+		/**
+		 * Return class defaults
+		 */
+		return {
+			factory: (...args: any[]) => new token(...args),
+			provide: metadata.provide,
+		};
 	}
 
-	const { factory, provide } = options;
-	
 	/**
-	 * Note: token is not a class here.
-	 * 
-	 * If token is not a class and options are not supplied,
-	 * there isn't any appropriate default factory method.
+	 * If options were supplied
 	 */
+	let { factory, provide } = options;
+
 	if (!factory) {
-		throw new Error(`
-			Could not infer how to instantiate provider ${token}.
-			Please supply factory function in options parameter.
-		`);
+
+		/**
+		 * If there's no factory and token is not a class,
+		 * we cannot infer how it is instantiated
+		 */
+		if (!isClass<T>(token)) {
+			throw new Error(`
+				Provider ${token} can't be instantiated.
+				Factory function wasn't supplied and token is not a class.
+			`);
+		}
+
+		/**
+		 * If token is a class, return factory defaults
+		 */
+		factory = (...args: any[]) => new token(...args);
 	}
 
 	if (!provide) {
-		throw new Error(`
-			Could not infer provide array for ${token}.
-			Please supply it in options parameter.
-		`);
+		/**
+		 * Try to get metadata from token (provider)
+		 */
+		try {
+			provide = Metadata.get(token).provide;
+		} catch(err) {
+			throw new Error(`
+				Provider ${token} can't be instantiated.
+				Provide array wasn't supplied and can't implicitly get metadata
+				for token.
+			`);
+		}
 	}
 
-	return merge(defaults, options);
+	/**
+	 * Else merge inferred defaults with options
+	 */
+	return merge(options, {
+		provide,
+		factory
+	});
 }
 
 export class Injector {
@@ -83,7 +132,7 @@ export class Injector {
 	 * 
 	 * @param options Optional provider resolution options.
 	 * 
-	 * __Note__: Factory function (and optionally provide) be supplied unless token is a class.
+	 * __Note__: Factory function (and optionally provide) should be supplied unless token is a class.
 	 * Otherwise it will throw upon registraction, or, if token is a function, upon
 	 * instantiation.
 	 */
@@ -125,7 +174,7 @@ export class Injector {
 		return this._resolve(factory, provide);
 	}
 
-	private _resolve<T>(factory: (...args: any[]) => T, provide: ResolveRequest[]): T {
-		return factory(...provide.map(({ token }) => this.resolve(token)));
+	private _resolve<T>(factory: (...args: any[]) => T, provide: any[]): T {
+		return factory(...provide.map(provider => this.resolve(provider)));
 	}
 }
