@@ -77,4 +77,4 @@ workflows:
             tags:
               only: /^v([0-9]\.)+$/
             branches:
-              ignore: /.*/
+              only: /master/
