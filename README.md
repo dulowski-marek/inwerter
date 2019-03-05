@@ -113,8 +113,11 @@ The outline of options and entities available. Coming soon.
 ## Docs
 Coming soon - at the time being I encourage to read the specs (they are not hard to eyes, I believe).
 
-## Issues
-Feel free to ask questions and raise issues.
+## Roadmap and release log
+Coming soon.
+
+## Contributing and issues
+Guide is coming soon.
 
 ## License
 [MIT License](./LICENSE)
