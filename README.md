@@ -1,11 +1,11 @@
 # Inwerter - DI for Typescript
-Inwerter is Depedency Injection for Typescript codebases.  
-It is vastly inspired by Angular's DI system but **is framework-agnostic**.  
+Inwerter provides depedency injection for Typescript projects.  
+It is heavily inspired by Angular's DI system but not bound to any framework.
 
 Be it browser or Node, you can use it in any environment.
 
-Please note, that it is still under development - although it will be avoided,  
-public API may be subject to changes until it reaches `1.0.0` version.
+Please note that Inwerter is still work in progress.
+The public API may change before the 1.0.0 release.
 
 ## Installation
 Just install it as project dependency using yarn or npm:
@@ -14,15 +14,15 @@ yarn add inwerter
 ```
 
 ## Usage
-Let's say you want to get instance of `Car` class.
-`Car` is designed to accept `Engine` and `Wheels`.
-How to achieve that without passing them manually? 2 steps are required:
+Let's say you want to get an instance of `Car` class.
+`Car` is designed to accept `Engine` and `Wheels` as dependencies.
+How to achieve that without passing them manually?
 
+2 steps are required:
 1. Decorate classes with `@Injectable()` decorator
 2. Call `injector.resolve(Car)`
 
-Calling `resolve(Car)` will return fully functional `Car` instance.
-(answer to *how it works* will be enclosed in docs soon).
+Calling `resolve` will return an instance of `Car`.
 
 ```ts
 import {
@@ -38,15 +38,19 @@ const injector = new Injector();
  */
 @Injectable()
 class Engine {
+    private message = 'V6 roars nicely!');
+
     public roar() {
-        console.log('V6 roars nicely!');
+        console.log(this.message);
     }
 }
 
 @Injectable()
 class Wheels {
+    private message = 'They see me rollin\'!');
+
     public spin() {
-        console.log('They see me rollin\'!');
+        console.log(this.message);
     }
 }
 
