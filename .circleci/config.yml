@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:latest
 
     working_directory: ~/.tmp
 
@@ -33,9 +33,27 @@ jobs:
           paths:
             - dist
 
+  test:
+    docker:
+      - image: circleci/node:latest
+
+    working_directory: ~/.tmp
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - default-{{ checksum "package.json" }}
+            - default
+
+      - run: yarn install
+      - run: yarn test
+
+
   publish:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:latest
 
     working_directory: ~/.tmp
 
@@ -47,34 +65,24 @@ jobs:
 
       - run: npm publish
 
-  cleanup:
-    docker:
-      - image: circleci/node:7.10
-
-    working_directory: ~/.tmp
-
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./
-      - run: yarn run cleanup
-
 workflows:
   version: 2
   publish:
     jobs:
-      - build:
+      - test:
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*$/
+              only: master
+      - build:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
       - publish:
           context: npmauth
           requires:
               - build
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*$/
+              only: master
