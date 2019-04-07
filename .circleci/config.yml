@@ -15,14 +15,14 @@ jobs:
             - default-{{ checksum "package.json" }}
             - default-
 
-      - run: npm install
+      - run: yarn install
 
       - save_cache:
           key: default-{{ checksum "package.json" }}
           paths:
             - ./node_modules
 
-      - run: npm run build
+      - run: yarn run build
       - persist_to_workspace:
           # We publish only ES module artifacts,
           # because the library is only to be used
@@ -42,8 +42,8 @@ jobs:
     steps:
       - checkout
 
-      - run: npm install
-      - run: npm run test
+      - run: yarn install
+      - run: yarn test
 
   publish:
     docker:
