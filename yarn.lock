@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@abraham/reflection@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@abraham/reflection/-/reflection-0.5.1.tgz#5223015a3875462dcf2b03edc8e70f1aad7af941"
+  integrity sha512-keHFMZO/2poNeoxxHaXF2FCYAyBrUYFtio1N698BjJNnC14m/uXhbRj2OKKXglfcAsDe1BSuUpJjfo+vx+w4Cg==
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -342,11 +347,6 @@
   version "11.13.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.6.tgz#37ec75690830acb0d74ce3c6c43caab787081e85"
   integrity sha512-Xoo/EBzEe8HxTSwaZNLZjaW6M6tA/+GmD3/DZ6uo8qSaolE/9Oarko0oV1fVfrLqOz0tx0nXJB4rdD5c+vixLw==
-
-"@types/reflect-metadata@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@types/reflect-metadata/-/reflect-metadata-0.0.5.tgz#9c042bfa9803d577aad4f57dfbca4b7cae4286fe"
-  integrity sha1-nAQr+pgD1Xeq1PV9+8pLfK5Chv4=
 
 "@types/resolve@0.0.8":
   version "0.0.8"
@@ -3126,11 +3126,6 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
-
-reflect-metadata@^0.1.10:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
-  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
