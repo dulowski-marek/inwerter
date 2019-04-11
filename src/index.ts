@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import '@abraham/reflection';
 
 export { Injector, ProvideMetadata } from './injector';
 export { Metadata } from './metadata';

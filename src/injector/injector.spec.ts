@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { Injector } from './injector';
 import { Injectable } from '../injectable';
 import { Inject } from '../inject';
