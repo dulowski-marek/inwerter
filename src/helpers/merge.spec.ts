@@ -1,19 +1,17 @@
-import { expect } from 'chai';
-
 import { merge } from './merge';
 
 describe('merge', () => {
-	it('throw when types are incompatible', () => {
+	test('throw when types are incompatible', () => {
 		const num = 1,
 			str = 'abc',
 			obj = {},
 			arr = [];
 
-		expect(() => merge(num, str)).to.throw;
-		expect(() => merge(num, obj)).to.throw;
-		expect(() => merge(num, arr)).to.throw;
-		expect(() => merge(str, arr)).to.throw;
-		expect(() => merge(arr, obj)).to.throw;
+		expect(() => merge(num, str)).toThrow();
+		expect(() => merge(num, obj)).toThrow();
+		expect(() => merge(num, arr)).toThrow();
+		expect(() => merge(str, arr)).toThrow();
+		expect(() => merge(arr, obj)).toThrow();
 	});
 
 	it('assign, if not recursive merge', () => {
@@ -23,7 +21,7 @@ describe('merge', () => {
 			num: 456
 		}, merged = merge(target, source);
 
-		expect(merged.num).to.equal(source.num);
+		expect(merged.num).toBe(source.num);
 	});
 
 	it('assign, if types incompatible', () => {
@@ -35,7 +33,7 @@ describe('merge', () => {
 			obj: 123
 		}, merged = merge(target, source);
 
-		expect(merged.obj).to.be.a('number');
+		expect(merged.obj).toBe(123);
 	});
 
 	it('merge recursively, if types compatible', () => {
@@ -51,9 +49,9 @@ describe('merge', () => {
 			}
 		}, merged = merge(target, source);
 
-		expect(merged.obj.bar).to.equal(source.obj.bar);
-		expect(merged.obj.quux).to.equal(source.obj.quux);
-		expect(merged.obj.foo).to.equal(target.obj.foo);
+		expect(merged.obj.bar).toBe(source.obj.bar);
+		expect(merged.obj.quux).toBe(source.obj.quux);
+		expect(merged.obj.foo).toBe(target.obj.foo);
 	});
 
 	it('deep merge recursively', () => {
@@ -71,6 +69,6 @@ describe('merge', () => {
 			}
 		}, merged = merge(target, source);
 
-		expect(merged.obj.foo.bar).to.equal(source.obj.foo.bar);
+		expect(merged.obj.foo.bar).toBe(source.obj.foo.bar);
 	});
 });

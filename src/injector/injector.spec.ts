@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import { expect } from 'chai';
 
 import { Injector } from './injector';
 import { Injectable } from '../injectable';
@@ -19,7 +18,7 @@ describe('Injector', () => {
 
 		const resolved = injector.resolve<Provider>(Provider);
 
-		expect(resolved.injectee).to.not.be.undefined;
+		expect(resolved.injectee).toBeDefined();
 	});
 
 	it('resolve with existing if singleton', () => {
@@ -46,7 +45,7 @@ describe('Injector', () => {
 		injector.resolve<Provider>(Provider);
 		injector.resolve<Provider>(Provider);
 
-		expect(count).to.equal(1);
+		expect(count).toBe(1);
 	});
 
 	it('use inject to manually specify provider token', () => {
@@ -66,6 +65,6 @@ describe('Injector', () => {
 			provide: [],
 		});
 
-		expect(injector.resolve<Provider>(Provider).injectedConfig).to.not.be.undefined;
+		expect(injector.resolve<Provider>(Provider).injectedConfig).toBeDefined();
 	});
 });
