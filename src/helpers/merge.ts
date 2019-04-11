@@ -35,9 +35,9 @@ function _merge<T, S>(target: T, source: S): T & S {
  */
 export function merge<T, S>(target: T, source: S): T & S {
 
-	if (!(bothArrays(target, source) || bothObjects(target, source))) {
-		throw new Error('Cannot merge incompatible types.');
+	if (bothArrays(target, source) || bothObjects(target, source)) {
+		return _merge(target, source);
 	}
 
-	return _merge(target, source);
+	throw new Error('Cannot merge incompatible types.');
 }
