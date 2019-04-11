@@ -53,11 +53,20 @@ jobs:
 
     steps:
       - checkout
-      - run: echo //registry.npmjs.org/:_authToken=${TOKEN} > ./.npmrc
+      - run:
+          name: Obtain registry authToken from env
+          command: echo //registry.npmjs.org/:_authToken=${TOKEN} > ./.npmrc
       - attach_workspace:
           at: ./
 
-      - run: npm publish
+      - run:
+          name: Publish
+          command: |
+            if [ $NPM_PUBLISH ]; then
+              npm publish
+            else
+              echo "NPM_PUBLISH not set, skipping..."
+            fi
 
 workflows:
   version: 2
@@ -66,7 +75,7 @@ workflows:
       - build:
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v[0-9]+(\.[0-9]+)*$/
       - publish:
@@ -75,6 +84,6 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^v[0-9]+(\.[0-9]+)*$/
