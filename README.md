@@ -1,8 +1,10 @@
 # Inwerter - DI for Typescript
 [![Build Status](https://travis-ci.org/dulowski-marek/inwerter.svg?branch=master)](https://travis-ci.org/dulowski-marek/inwerter)
 [![npm Version](https://badgen.net/npm/v/inwerter)](https://www.npmjs.com/package/inwerter)
+[![Minified size](https://badgen.net/bundlephobia/min/inwerter)](https://bundlephobia.com/result?p=inwerter)
+[![Minzipped size](https://badgen.net/bundlephobia/minzip/inwerter)](https://bundlephobia.com/result?p=inwerter)
 
-Inwerter provides depedency injection for Typescript projects.  
+Inwerter provides dependency injection for Typescript projects.
 It is heavily inspired by Angular's DI system but not bound to any framework.
 
 Be it browser or Node, you can use it in any environment.
