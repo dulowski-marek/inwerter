@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "10"
+
+cache:
+  directories:
+    - node_modules
+
+jobs:
+  include:
+    - stage: "Test"
+      script: yarn test
+    - stage: "Deploy"
+      node_js: "10"
+      script: yarn build
+      deploy:
+        provider: npm
+        email: dulowski.marek@gmail.com
+        api_key:
+          secure: TNDF79vD/Y+j+Pg7E+0ptGUjN1XXJLMj/ik926uXfxE30JRk42j8KYnenGsq7YakJg3QMB9l5Phz4Cw1NuEZCSJOZnBFEfp8qeTDo7MpiAg3/hSpcaD39Kq4pzvbeB1lxQpQDh+2JpNrLwEJeg8qED6qH98taC0tkD5bl/9AYSy29bN9XXCCe0a4SoUrLr+ltCK5pK6qL8IhO0LE3NVd5hSfCvb1gHDjRY9eIqineeteNK22C5orydO3zMGLa13s/ClPl7jdZ12EhXIIM9SLvReoCP7ToYsSfg1M+YYtpB51w6GV62hgi5+80VN8zqGSq3rwcxmZ7tZSK9/UYioqzFk73mg9DrlXuJ94DKJJ6wlWdZuutLNfTvJ4v67/9sepB35hPzPG1RO3aZdWiinhesVmtKjA4dhhuiUEXXbYuLNLqHSxhTj9VFmuX69nFtPaixeVizCcsEPz0G+XhPVriyBkY9abREuaGUoAjmzUSNHKgglLxnPTyb1DVqEg/8syWkN4+2/riKQMQ8spXjxhl3ueEJrD81fAbtcwLgWbgtk7YY//BcMm1vAbN0NbGcx8VtMiHVD5PDhcdtZOPs/P5CQs31fpJMdmp2j7rtUlsmbfAB5u1bJcvf6zfwp3PR5ueJjHeRYO0TrDJMCcdTrpTtTFU7SkkOmfgiQt5/7xZo0=
+        skip_cleanup: true
+        on:
+          tags: true
