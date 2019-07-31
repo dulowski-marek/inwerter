@@ -14,4 +14,7 @@ module.exports = {
 		"json",
 		"node"
 	],
+	"setupFilesAfterEnv": [
+		"<rootDir>/setupTests.ts",
+	],
 };

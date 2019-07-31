@@ -40,7 +40,7 @@ export function _uniformProvideMetadata<T>(token: Newable<T> | any, options?: Pa
 		/**
 		 * Get metadata if token is a class
 		 */
-		const metadata = Metadata.get(token);
+		const metadata: any = Metadata.get(token);
 
 		/**
 		 * If there's no provide key in token's metadata
