@@ -11,7 +11,6 @@ jobs:
     - stage: "Test"
       script: yarn test
     - stage: "Deploy"
-      node_js: "10"
       script: yarn build
       deploy:
         provider: npm
@@ -19,4 +18,4 @@ jobs:
         api_key: "$NPM_DEPLOY_API_KEY"
         skip_cleanup: true
         on:
-          tags: true
+          branch: master
