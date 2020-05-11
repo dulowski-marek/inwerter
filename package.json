@@ -1,10 +1,10 @@
 {
   "name": "inwerter",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Modular dependency injection simplified",
   "main": "dist/index.umd.js",
-  "types": "dist/esm/index.d.ts",
-  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc --declaration --outDir dist && rollup -c",
