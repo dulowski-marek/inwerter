@@ -24,7 +24,7 @@
     "rollup-plugin-node-resolve": "4.2.3",
     "rollup-plugin-terser": "4.0.4",
     "ts-jest": "24.0.2",
-    "typescript": "3.3.3333"
+    "typescript": "3.9.9"
   },
   "dependencies": {
     "@abraham/reflection": "^0.6.0"
