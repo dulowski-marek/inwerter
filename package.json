@@ -27,6 +27,6 @@
     "typescript": "3.3.3333"
   },
   "dependencies": {
-    "@abraham/reflection": "^0.6.0"
+    "@abraham/reflection": "^0.8.0"
   }
 }
