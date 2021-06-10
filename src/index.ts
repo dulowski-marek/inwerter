@@ -1,4 +1,4 @@
-import '@abraham/reflection';
+import './polyfills';
 
 export { Injector, ProvideMetadata } from './injector';
 export { Metadata } from './metadata';
