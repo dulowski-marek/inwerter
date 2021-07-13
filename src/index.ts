@@ -1,7 +1,6 @@
 import './polyfills';
 
-export { Injector, ProvideMetadata } from './injector';
-export { Metadata } from './metadata';
-export { Injectable } from './injectable';
-export { Provide } from './provide';
+export { Injector } from './injector';
+export { Resolvable } from './Resolvable';
 export { Inject } from './inject';
+export { Descriptor } from './Descriptor';

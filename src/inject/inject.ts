@@ -1,18 +1,14 @@
-import { Metadata } from '../metadata';
-
-import { merge } from '../helpers/merge';
-
 /**
- * Allows for specifying arbitrary token,
+ * Allows specifying arbitrary token,
  * which should be used to lookup the provider
  * to be injected.
  */
+import { DependenciesProxy } from '../DependenciesProxy/DependenciesProxy';
+
 export function Inject(token: any) {
 	return (target: any, key: string, index: number) => {
-		let metadata = Metadata.get(target) || { provide: [] };
+	    const proxy = new DependenciesProxy(target);
 
-		metadata.provide[index] = token;
-
-		Metadata.set(target, metadata);
+	    proxy.setDependency(index, token);
 	};
 }
