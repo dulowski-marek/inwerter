@@ -1,6 +1,13 @@
+# Tools
 .vscode
+.idea
 
-.gitignore
+# Configuration
+*.iml
+
+# Vendor
 node_modules
 
+# Artifacts
 dist
+coverage

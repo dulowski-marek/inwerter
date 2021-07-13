@@ -1,0 +1,27 @@
+{
+  "name": "inwerter-react",
+  "version": "0.1.0",
+  "description": "IoC for React",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Marek Dulowski <dulowski.marek@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "inwerter": "^0.3.2",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
+    "inwerter": "^0.3.2",
+    "jest": "^27.0.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  }
+}

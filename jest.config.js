@@ -1,6 +1,16 @@
 module.exports = {
+	"globals": {
+		"ts-jest": {
+			tsconfig: "./tsconfig.test.json"
+		}
+	},
+	"projects": [
+		"<rootDir>",
+		"<rootDir>/packages/*"
+	],
 	"roots": [
-		"<rootDir>/src"
+		"<rootDir>/src",
+		"<rootDir>/test",
 	],
 	"transform": {
 		"^.+\\.tsx?$": "ts-jest"
