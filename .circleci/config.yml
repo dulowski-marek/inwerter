@@ -55,7 +55,7 @@ jobs:
       - checkout
       - run:
           name: Obtain registry authToken from env
-          command: echo //registry.npmjs.org/:_authToken=${TOKEN} > ./.npmrc
+          command: echo //registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN} > ./.npmrc
       - attach_workspace:
           at: ./
 
