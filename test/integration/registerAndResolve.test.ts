@@ -1,8 +1,7 @@
-import { Injector } from '../../src/injector';
+import { Injector, Inject } from '../../src';
 import { ofConst } from '../../src/descriptors';
 import { ofClass } from '../../src/descriptors';
 import { Resolvable } from '../../src';
-import { Inject } from '../../src/inject';
 
 describe("Register and resolve", () => {
     describe("given that a constant is registered with ofConst()", () => {
