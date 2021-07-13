@@ -6,7 +6,7 @@ module.exports = {
 	},
 	"projects": [
 		"<rootDir>",
-		"<rootDir>/packages/*"
+		// "<rootDir>/packages/*"
 	],
 	"roots": [
 		"<rootDir>/src",
