@@ -1,6 +1,6 @@
 import { Injector } from './Injector';
-import { GenericFactory } from '../Factory/GenericFactory';
-import { Resolvable } from '../Resolvable';
+import { GenericFactory } from './Factory/GenericFactory';
+import { Resolvable } from './Resolvable';
 
 describe('Injector', () => {
     describe('resolve', () => {

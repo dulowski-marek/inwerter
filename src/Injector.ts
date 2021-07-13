@@ -1,5 +1,5 @@
-import { Descriptor } from '../Descriptor';
-import { DescriptorStore } from '../DescriptorStore';
+import { Descriptor } from './Descriptor';
+import { DescriptorStore } from './DescriptorStore';
 
 export class Injector {
     constructor(
