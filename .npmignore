@@ -3,5 +3,6 @@
 .vscode
 
 src
+packages
 
 .gitignore
