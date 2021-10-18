@@ -20,7 +20,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@types/jest": "26.0.23",
+    "@types/jest": "27.0.2",
     "jest": "27.0.4",
     "rollup": "2.51.1",
     "rollup-plugin-filesize": "9.1.1",
