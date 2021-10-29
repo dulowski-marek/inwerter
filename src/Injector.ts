@@ -13,6 +13,7 @@ export class Injector {
         return this;
     }
 
+    public resolve<T>(Constructor: T): T extends abstract new (...args: any[]) => infer R ? R : never;
     public resolve<T>(token: any): T {
         if (this.container.has(token)) {
             return this.container.get(token);
