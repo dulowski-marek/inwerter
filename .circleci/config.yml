@@ -63,6 +63,7 @@ jobs:
           name: Publish
           command: |
             if [ $NPM_PUBLISH ]; then
+              cp .npmrc dist
               cd dist
               npm publish
             else
