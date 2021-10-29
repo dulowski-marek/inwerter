@@ -62,7 +62,7 @@ describe("Register and resolve", () => {
             injector.register(ofClass(Dependency));
             injector.register(ofClass(MockClass));
 
-            const result = injector.resolve<MockClass>(MockClass);
+            const result = injector.resolve(MockClass);
 
             // when
             result.call();
@@ -97,7 +97,7 @@ describe("Register and resolve", () => {
             injector.register(ofClass(MockClass));
 
             // when
-            const result = injector.resolve<MockClass>(MockClass);
+            const result = injector.resolve(MockClass);
 
             // then
             expect(result.bar).toBeInstanceOf(Quux);
