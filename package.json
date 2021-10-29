@@ -2,12 +2,12 @@
   "name": "inwerter",
   "version": "0.5.1",
   "description": "Modular dependency injection simplified",
-  "main": "dist",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "main": "./index.umd.js",
+  "types": "./index.d.ts",
+  "module": "./index.js",
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "tsc --declaration --outDir dist",
+    "build": "tsc --declaration --outDir dist && cp package.json dist",
     "clean": "rm -rf dist",
     "start": "jest --watch",
     "test": "jest"
