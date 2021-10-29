@@ -63,6 +63,7 @@ jobs:
           name: Publish
           command: |
             if [ $NPM_PUBLISH ]; then
+              cd dist
               npm publish
             else
               echo "NPM_PUBLISH not set, skipping..."
@@ -88,6 +89,7 @@ workflows:
           context: npmauth
           requires:
             - build
+            - test-unit
           filters:
             branches:
               ignore: /.*/
