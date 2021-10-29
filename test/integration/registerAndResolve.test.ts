@@ -1,6 +1,5 @@
 import { Injector, Inject } from '../../src';
-import { ofConst } from '../../src/descriptors';
-import { ofClass } from '../../src/descriptors';
+import { ofConst, ofImplementation, ofClass } from '../../src/descriptors';
 import { Resolvable } from '../../src';
 
 describe("Register and resolve", () => {
@@ -101,6 +100,31 @@ describe("Register and resolve", () => {
 
             // then
             expect(result.bar).toBeInstanceOf(Quux);
+        });
+    });
+
+    describe("given that implementation is registered with ofImplementation()", () => {
+        test("it can be resolved using provided interface", () => {
+            // given
+            const injector = new Injector();
+
+            abstract class Abstraction {
+                abstract method(): string;
+            }
+
+            class Implementation implements Abstraction {
+                method(): string {
+                    return 'Called implementation';
+                }
+            }
+
+            injector.register(ofImplementation(Abstraction, Implementation));
+
+            // when
+            const result = injector.resolve(Abstraction);
+
+            // then
+            expect(result.method()).toStrictEqual('Called implementation');
         });
     });
 });
