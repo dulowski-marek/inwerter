@@ -2,7 +2,7 @@
   "name": "inwerter",
   "version": "0.5.0",
   "description": "Modular dependency injection simplified",
-  "main": "dist/index.js",
+  "main": "dist",
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "scripts": {
