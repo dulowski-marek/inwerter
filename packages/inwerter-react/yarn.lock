@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@abraham/reflection@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@abraham/reflection/-/reflection-0.6.0.tgz#6ad5776620298550a2a9aaa064d619baee75ba6e"
-  integrity sha512-6YiTkoiDg3P5MHOa1bSGQzXwL8R1iN5anRjcKG8G/ftaw2BwtjJ8iX4Fq7IQ7jkBy/fSpE7SaY0nUY+LPWLlHw==
+"@abraham/reflection@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@abraham/reflection/-/reflection-0.8.0.tgz#f8103d1a4a0ed7b846668e35834c22c14044e0f1"
+  integrity sha512-Oy2jk9hHEI/t1avTgB4BCQtceUOqwrElQdecGS0wTqH5rc0KXysUrhpX4ep0vCMjoxzNyXSx7JU+KWkrkFIKOg==
 
 "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.14.5":
   version "7.14.5"
@@ -1454,12 +1454,12 @@ inherits@2, inherits@^2.0.4:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-inwerter@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/inwerter/-/inwerter-0.3.2.tgz#4dc16656fd541a0fe369c6f64953e1c6d0e47c84"
-  integrity sha512-Qk0Ssf/w39VSEpN8AuV0nWfbrZ5tTqNZ2dDv36bQNF1gMibNJUS8L8HPSL86n1B8u9vavCmhy4hzXlWdjOX1uA==
+inwerter@^0.5.0:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/inwerter/-/inwerter-0.5.2.tgz#ba0d3c6b714c5b0e6606dfcea635202759ae324e"
+  integrity sha512-9kVM/qTvimVt0owbtduJSjogJGMcTamvsqCEFbTzLpN6yn3yVE38Zuq1dko6vo82OxvkB9adMMht+oYBB9Yxow==
   dependencies:
-    "@abraham/reflection" "^0.6.0"
+    "@abraham/reflection" "^0.8.0"
 
 is-ci@^3.0.0:
   version "3.0.0"
