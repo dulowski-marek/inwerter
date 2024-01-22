@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repository is now archived and read-only. The project is continued in https://github.com/archware-io/di
+
 # Inwerter - DI for Typescript
 [![Build Status](https://travis-ci.org/dulowski-marek/inwerter.svg?branch=master)](https://travis-ci.org/dulowski-marek/inwerter)
 [![npm Version](https://badgen.net/npm/v/inwerter)](https://www.npmjs.com/package/inwerter)
